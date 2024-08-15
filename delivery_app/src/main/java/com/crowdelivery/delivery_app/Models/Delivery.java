@@ -1,5 +1,5 @@
 
-package com.crowdelivery.Models;
+package com.crowdelivery.delivery_app.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,8 +13,8 @@ public class Delivery{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long deliveryID;
-    private Driver driver;
-    private User user;
+    private Long driverID;
+    private Long userID;
     private double destinationLatitude;
     private double destinationLongitude;
     private double currentLatitude;
@@ -27,23 +27,23 @@ public class Delivery{
     protected Delivery(){}
 
 
-    public Delivery(Long deliveryID, Driver driver, User user, double destLatitude, double destLongitude){
-        this.deliveryID = deliveryID;
-        this.driver = driver;
-        this.user = user;
+    public Delivery(Long user, double destLatitude, double destLongitude, String packageDesc, boolean active){
+        this.userID = user;
         this.destinationLatitude = destLatitude;
         this.destinationLongitude = destLongitude;
+        this.packageDescription = packageDesc;
+        this.active = active;
     }
 
     public Long getDeliveryID(){
         return this.deliveryID;
     }
     
-    public Driver getDriver(){
-        return this.driver;
+    public Long getDriver(){
+        return this.driverID;
     }
-    public User getUser(){
-        return this.user;
+    public Long getUser(){
+        return this.userID;
     }
     public double getDestinationLongitude(){
         return this.destinationLatitude;
@@ -70,11 +70,11 @@ public class Delivery{
         this.deliveryID = deliveryID;
     }
 
-    public void setDriver(Driver driver){
-        this.driver = driver;
+    public void setDriver(Long driverID){
+        this.driverID = driverID;
     }
-    public void setUser(User user){
-        this.user = user;
+    public void setUser(Long userID){
+        this.userID = userID;
     }
 
     public void setDestinationLatitude(double destLatitude){

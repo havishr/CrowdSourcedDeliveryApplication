@@ -1,4 +1,4 @@
-package com.crowdelivery.Models;
+package com.crowdelivery.delivery_app.Models;
 
 public class Filter {
     private Double radius;

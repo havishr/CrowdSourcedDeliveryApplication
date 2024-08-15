@@ -3,9 +3,10 @@ package com.crowdelivery.delivery_app.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.crowdelivery.Models.Delivery;
-import com.crowdelivery.Models.Driver;
-import com.crowdelivery.Repositories.DeliveryRepository;
+import com.crowdelivery.delivery_app.DTOs.CreateDeliveryDTO;
+import com.crowdelivery.delivery_app.DTOs.EditDeliveryDTO;
+import com.crowdelivery.delivery_app.Models.Delivery;
+import com.crowdelivery.delivery_app.Repositories.DeliveryRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -21,29 +22,38 @@ public class DeliveryService {
     }
 
     @Transactional
-    public void requestDelivery(Delivery delivery){
-        deliveryRepository.save(delivery);
+    public void requestDelivery(CreateDeliveryDTO request){
+
+        Delivery delivery = new Delivery(request.getUserID(), request.getDestinationLatitude(), request.getDestinationLongitude(), request.getPackageDescription(), false);
+
+        this.deliveryRepository.save(delivery);
     }
 
-    public void cancelDelivery(Delivery delivery){
-        deliveryRepository.delete(delivery);
+
+    public void cancelDelivery(EditDeliveryDTO request){
+        this.deliveryRepository.deleteById(request.getDeliveryID());
     }
 
-    public void acceptDelivery(Delivery delivery, Driver driver){
+    public void acceptDelivery(EditDeliveryDTO request){
+        Delivery delivery = this.deliveryRepository.getReferenceById(request.getDeliveryID());
         if (delivery.getDriver() != null) {
             throw new IllegalStateException("This delivery is already assigned to a driver.");
         }
-        delivery.setDriver(driver);
+        
+        delivery.setDriver(request.getDriverId());
         delivery.setStatus(true);
-        deliveryRepository.save(delivery);
+        this.deliveryRepository.save(delivery);
+        
     }
 
-    public void completeDelivery(Delivery delivery){
+    public void completeDelivery(EditDeliveryDTO request){
+        Delivery delivery = this.deliveryRepository.getReferenceById(request.getDriverId());
         delivery.setStatus(false);
         deliveryRepository.save(delivery);
     }
 
-    public String getCurrentLocation(Delivery delivery){
+    public String getCurrentLocation(EditDeliveryDTO request){
+        Delivery delivery = this.deliveryRepository.getReferenceById(request.getDeliveryID());
         return "( +" + delivery.getCurrentLatitude() + ", " + delivery.getCurrentLongitude() + ")";
     }
 

@@ -1,7 +1,9 @@
-package com.crowdelivery.Repositories;
+package com.crowdelivery.delivery_app.Repositories;
 
-import com.crowdelivery.Models.Driver;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.crowdelivery.delivery_app.Models.Driver;
+
 import java.util.List;
 
 

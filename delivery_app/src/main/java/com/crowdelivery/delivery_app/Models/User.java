@@ -1,4 +1,4 @@
-package com.crowdelivery.Models;
+package com.crowdelivery.delivery_app.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,8 +20,7 @@ public class User{
 
     protected User(){}
 
-    public User(Long userid, String username, String password, String email, String firstName, String lastName){
-        this.userID = userid;
+    public User(String username, String password, String email, String firstName, String lastName){
         this.username = username;
         this.password = password;
         this.email = email;
@@ -51,6 +50,11 @@ public class User{
     public String getLastName(){
         return this.lastName;
     }
+
+
+
+
+    
     public void setUserID(Long newUserID){
         this.userID = newUserID;
     }
@@ -67,11 +71,11 @@ public class User{
         this.email = email;
     }
 
-    public void firstName(String firstName){
+    public void setFirstName(String firstName){
         this.firstName = firstName;
     }
 
-    public void lastName(String lastName){
+    public void setLastName(String lastName){
         this.lastName = lastName;
     }
 

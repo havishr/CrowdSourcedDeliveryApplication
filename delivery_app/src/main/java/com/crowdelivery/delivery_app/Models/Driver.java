@@ -1,4 +1,4 @@
-package com.crowdelivery.Models;
+package com.crowdelivery.delivery_app.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,8 +22,7 @@ public class Driver{
 
     protected Driver(){}
 
-    public Driver(Long driverid, Filter filters, String username, String password, String email, String firstName, String lastName){
-        this.driverID = driverid;
+    public Driver(Filter filters, String username, String password, String email, String firstName, String lastName){
         this.filters = filters;
         this.username = username;
         this.password = password;
@@ -80,11 +79,11 @@ public class Driver{
         this.email = email;
     }
 
-    public void firstName(String firstName){
+    public void setFirstName(String firstName){
         this.firstName = firstName;
     }
 
-    public void lastName(String lastName){
+    public void setLastName(String lastName){
         this.lastName = lastName;
     }
 
