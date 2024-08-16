@@ -1,5 +1,8 @@
 package com.crowdelivery.delivery_app.Models;
 
+import org.springframework.security.core.Transient;
+
+@Transient
 public class Filter {
     private Double radius;
     private Double rideLen;
